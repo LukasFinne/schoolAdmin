@@ -17,17 +17,17 @@ public class Course {
     @ManyToMany(mappedBy = "courseSet")
     private Set<Teacher> teacherSet;
 
-    @ManyToMany(mappedBy = "courseList")
-    private List<Student> studentList;
+    @OneToMany(mappedBy = "course")
+    private List<CourseGrade> grade;
 
     public Course(String name, Set teacherSet) {
         this.name = name;
         this.teacherSet = teacherSet;
     }
 
-    public Course(String name, List studentList) {
+    public Course(String name, List<CourseGrade> grade) {
         this.name = name;
-        this.studentList = studentList;
+        this.grade = grade;
     }
 
     public Course() {
@@ -45,12 +45,16 @@ public class Course {
         return teacherSet;
     }
 
-    public void setTeacherSet(Set teacherSet) {
+    public void setTeacherSet(Set<Teacher> teacherSet) {
         this.teacherSet = teacherSet;
     }
 
-    public List getStudentList() {
-        return studentList;
+    public List<CourseGrade> getGrade() {
+        return grade;
+    }
+
+    public void setGrade(List<CourseGrade> grade) {
+        this.grade = grade;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class Course {
                 "courseId=" + courseId +
                 ", name='" + name + '\'' +
                 ", teacherSet=" + teacherSet +
-                ", studentList=" + studentList +
+                ", grade=" + grade +
                 '}';
     }
 }

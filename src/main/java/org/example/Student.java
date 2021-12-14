@@ -17,19 +17,14 @@ public class Student {
     @JoinColumn(name = "educationId", referencedColumnName = "educationId")
     private Education education;
 
-    @ManyToMany
-    @JoinTable(
-            name = "studentCourse",
-            joinColumns = @JoinColumn(name = "studentId"),
-            inverseJoinColumns = @JoinColumn(name = "courseId")
-    )
-    List<Course> courseList;
+    @OneToMany(mappedBy = "student")
+    List<CourseGrade> grade;
 
 
-    public Student(String firstName, String lastName, List courseList) {
+    public Student(String firstName, String lastName, List<CourseGrade> grade) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.courseList = courseList;
+        this.grade = grade;
     }
 
     public Student() {
@@ -59,12 +54,12 @@ public class Student {
         this.education = education;
     }
 
-    public List getCourseList() {
-        return courseList;
+    public List<CourseGrade> getGrade() {
+        return grade;
     }
 
-    public void setCourseList(List courseList) {
-        this.courseList = courseList;
+    public void setGrade(List<CourseGrade> grade) {
+        this.grade = grade;
     }
 
     @Override
@@ -74,7 +69,7 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", education=" + education +
-                ", courseList=" + courseList +
+                ", grade=" + grade +
                 '}';
     }
 }
