@@ -1,9 +1,7 @@
 package org.example;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Education {
@@ -13,6 +11,10 @@ public class Education {
     private int educationId;
 
     private String name;
+
+    @OneToMany(targetEntity = Course.class)
+    private List courseList;
+
 
     public Education() {
     }
@@ -27,6 +29,14 @@ public class Education {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List courseList) {
+        this.courseList = courseList;
     }
 
     @Override

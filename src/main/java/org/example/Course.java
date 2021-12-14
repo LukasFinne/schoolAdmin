@@ -12,9 +12,6 @@ public class Course {
 
     private String name;
 
-    @OneToOne
-    private Education education;
-
     @ManyToMany(targetEntity = Teacher.class)
     private Set teacherSet;
 
@@ -34,14 +31,6 @@ public class Course {
         this.name = name;
     }
 
-    public Education getEducation() {
-        return education;
-    }
-
-    public void setEducation(Education education) {
-        this.education = education;
-    }
-
     public Set getTeacherSet() {
         return teacherSet;
     }
@@ -55,7 +44,7 @@ public class Course {
         return "Course{" +
                 "courseId=" + courseId +
                 ", name='" + name + '\'' +
-                ", education=" + education +
+                ", teacherSet=" + teacherSet +
                 '}';
     }
 }
