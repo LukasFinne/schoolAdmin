@@ -2,6 +2,7 @@ package org.example;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Education {
@@ -12,8 +13,15 @@ public class Education {
 
     private String name;
 
-    @OneToMany(targetEntity = Course.class)
-    private List courseList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "courseId")
+    private Set<Course> courseSet;
+
+    @OneToOne(mappedBy = "education")
+    private Student student;
+
+    @OneToOne(mappedBy = "education")
+    private Teacher teacher;
 
 
     public Education() {
@@ -31,12 +39,12 @@ public class Education {
         this.name = name;
     }
 
-    public List getCourseList() {
-        return courseList;
+    public Set<Course> getCourseSet() {
+        return courseSet;
     }
 
-    public void setCourseList(List courseList) {
-        this.courseList = courseList;
+    public void setCourseSet(Set<Course> courseSet) {
+        this.courseSet = courseSet;
     }
 
     @Override
@@ -44,6 +52,7 @@ public class Education {
         return "Education{" +
                 "educationId=" + educationId +
                 ", name='" + name + '\'' +
+                ", courseSet=" + courseSet +
                 '}';
     }
 }

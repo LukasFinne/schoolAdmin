@@ -13,11 +13,17 @@ public class Student {
     private String firstName;
     private String lastName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "educationId", referencedColumnName = "educationId")
     private Education education;
 
-    @ManyToMany(targetEntity = Course.class)
-    private List courseList;
+    @ManyToMany
+    @JoinTable(
+            name = "studentCourse",
+            joinColumns = @JoinColumn(name = "studentId"),
+            inverseJoinColumns = @JoinColumn(name = "courseId")
+    )
+    List<Course> courseList;
 
 
     public Student(String firstName, String lastName, List courseList) {

@@ -13,11 +13,16 @@ public class Teacher {
     private String firstName;
     private String lastName;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "educationId", referencedColumnName = "educationId")
     private Education education;
 
-    @ManyToMany(targetEntity = Course.class)
-    private Set courseSet;
+    @ManyToMany
+    @JoinTable(
+            name = "TeacherCourse",
+            joinColumns = @JoinColumn(name = "teacherId"),
+            inverseJoinColumns = @JoinColumn(name = "courseId"))
+    private Set<Course> courseSet;
 
     public Teacher(String firstName, String lastName, Set courseSet) {
         this.firstName = firstName;

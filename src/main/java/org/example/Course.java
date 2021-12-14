@@ -13,11 +13,12 @@ public class Course {
 
     private String name;
 
-    @ManyToMany(targetEntity = Teacher.class)
-    private Set teacherSet;
 
-    @ManyToMany(targetEntity = Student.class)
-    private List studentList;
+    @ManyToMany(mappedBy = "courseSet")
+    private Set<Teacher> teacherSet;
+
+    @ManyToMany(mappedBy = "courseList")
+    private List<Student> studentList;
 
     public Course(String name, Set teacherSet) {
         this.name = name;
