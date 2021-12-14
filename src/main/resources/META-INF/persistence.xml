@@ -5,6 +5,7 @@
         <class>org.example.Education</class>
         <class>org.example.Teacher</class>
         <class>org.example.Course</class>
+        <class>org.example.Student</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/school"/>
