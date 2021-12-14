@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Teacher {
@@ -15,9 +16,13 @@ public class Teacher {
     @OneToOne
     private Education education;
 
-    public Teacher(String firstName, String lastName) {
+    @ManyToMany(targetEntity = Course.class)
+    private Set courseSet;
+
+    public Teacher(String firstName, String lastName, Set courseSet) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.courseSet = courseSet;
     }
 
     public Teacher() {
@@ -45,6 +50,14 @@ public class Teacher {
 
     public void setEducation(Education education) {
         this.education = education;
+    }
+
+    public Set getCourseSet() {
+        return courseSet;
+    }
+
+    public void setCourseSet(Set courseSet) {
+        this.courseSet = courseSet;
     }
 
     @Override
