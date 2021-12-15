@@ -8,12 +8,12 @@ public class CourseGrade {
     @EmbeddedId()
     CourseGradeKey id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("studentId")
     @JoinColumn(name = "studentId")
     Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("courseId")
     @JoinColumn(name = "courseId")
     Course course;

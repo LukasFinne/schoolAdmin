@@ -16,21 +16,20 @@ public class Teacher {
     @Column(length = 45)
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true,fetch = FetchType.LAZY)
     @JoinColumn(name = "educationId", referencedColumnName = "educationId")
-    private Education education;
+    private Education educationT;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "TeacherCourse",
             joinColumns = @JoinColumn(name = "teacherId"),
             inverseJoinColumns = @JoinColumn(name = "courseId"))
     private Set<Course> courseSet;
 
-    public Teacher(String firstName, String lastName, Set courseSet) {
+    public Teacher(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.courseSet = courseSet;
     }
 
     public Teacher() {
@@ -53,11 +52,11 @@ public class Teacher {
     }
 
     public Education getEducation() {
-        return education;
+        return educationT;
     }
 
     public void setEducation(Education education) {
-        this.education = education;
+        this.educationT = education;
     }
 
     public Set getCourseSet() {
@@ -74,7 +73,7 @@ public class Teacher {
                 "TeacherId=" + TeacherId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", education=" + education +
+                ", education=" + educationT +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package org.example;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,15 @@ public class Course {
     private String name;
 
 
-    @ManyToMany(mappedBy = "courseSet")
+    @ManyToMany(mappedBy = "courseSet",fetch = FetchType.LAZY)
     private Set<Teacher> teacherSet;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(mappedBy = "course",fetch = FetchType.LAZY)
     private List<CourseGrade> grade;
+
+    public Course(String name) {
+        this.name = name;
+    }
 
     public Course(String name, Set teacherSet) {
         this.name = name;
@@ -57,6 +62,19 @@ public class Course {
 
     public void setGrade(List<CourseGrade> grade) {
         this.grade = grade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return courseId == course.courseId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseId);
     }
 
     @Override
