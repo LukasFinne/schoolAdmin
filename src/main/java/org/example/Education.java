@@ -9,8 +9,10 @@ public class Education {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "SMALLINT")
     private int educationId;
 
+    @Column(length = 70)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)

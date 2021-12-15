@@ -1,5 +1,6 @@
 package org.example;
 
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -7,13 +8,14 @@ import java.util.Objects;
 
 @Embeddable
 public class CourseGradeKey implements Serializable {
+
     @Column(name = "studentId")
-    int studentId;
+    short studentId;
 
     @Column(name = "courseId")
-    int courseId;
+    short courseId;
 
-    public CourseGradeKey(int studentId, int courseId) {
+    public CourseGradeKey(short studentId, short courseId) {
         this.studentId = studentId;
         this.courseId = courseId;
     }
@@ -21,19 +23,19 @@ public class CourseGradeKey implements Serializable {
     public CourseGradeKey() {
     }
 
-    public int getStudentId() {
+    public short getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(short studentId) {
         this.studentId = studentId;
     }
 
-    public int getCourseId() {
+    public short getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(short courseId) {
         this.courseId = courseId;
     }
 

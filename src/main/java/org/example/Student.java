@@ -8,9 +8,12 @@ import java.util.Set;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "SMALLINT")
     private int studentId;
 
+    @Column(length = 45)
     private String firstName;
+    @Column(length = 45)
     private String lastName;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class CourseGrade {
 
-    @EmbeddedId
+    @EmbeddedId()
     CourseGradeKey id;
 
     @ManyToOne
@@ -18,12 +18,17 @@ public class CourseGrade {
     @JoinColumn(name = "courseId")
     Course course;
 
-    int grade;
+    //Using byte to get tinyint in mySQL
+    byte grade;
 
-    public CourseGrade(Student student, Course course, int grade) {
+    public CourseGrade(Student student, Course course, byte grade) {
         this.student = student;
         this.course = course;
         this.grade = grade;
+    }
+
+    public CourseGrade() {
+
     }
 
     public Student getStudent() {
@@ -42,11 +47,11 @@ public class CourseGrade {
         this.course = course;
     }
 
-    public int getGrade() {
+    public byte getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(byte grade) {
         this.grade = grade;
     }
 

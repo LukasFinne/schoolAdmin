@@ -8,9 +8,12 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "SMALLINT")
     private int TeacherId;
 
+    @Column(length = 45)
     private String firstName;
+    @Column(length = 45)
     private String lastName;
 
     @OneToOne(cascade = CascadeType.ALL)

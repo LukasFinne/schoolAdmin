@@ -9,8 +9,10 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "SMALLINT")
     private int courseId;
 
+    @Column(length = 50)
     private String name;
 
 

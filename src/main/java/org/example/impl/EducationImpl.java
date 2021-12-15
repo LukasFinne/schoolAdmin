@@ -25,12 +25,21 @@ public class EducationImpl implements EducationDao {
     }
 
     @Override
-    public void update(Education education) {
+    public Education getById(int id) {
+        return em.find(Education.class,id);
+    }
 
+    @Override
+    public void update(Education education) {
+        em.getTransaction().begin();
+        em.merge(education);
+        em.getTransaction().commit();
     }
 
     @Override
     public void delete(Education education) {
-
+        em.getTransaction().begin();
+        em.remove(education);
+        em.getTransaction().commit();
     }
 }
